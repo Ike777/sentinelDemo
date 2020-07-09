@@ -1,0 +1,54 @@
+dataSource:
+    names: ds0,ds1
+    ds0:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds0?nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: admin
+        type: com.alibaba.druid.pool.DruidDataSource
+    ds1:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds1?nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: admin
+        type: com.alibaba.druid.pool.DruidDataSource
+
+shardingRule:
+    tables:
+        t_user$:
+            actualDataNodes: ds${0..1}.t_user${0..1}
+            databaseStrategy:
+                inline:
+                    shardingColumn: tenant_id
+                    algorithmExpression: ds${tenant_id % 2}
+            tableStrategy:
+                inline:
+                    shardingColumn: order_id
+                    algorithmExpression: t_user${tenant_id % 2}
+            keyGenerator:
+                type: SNOWFLAKE
+                column: id
+        t_order_item:
+            actualDataNodes: ds${0..1}.t_order_item${0..1}
+            databaseStrategy:
+                inline:
+                    shardingColumn: user_id
+                    algorithmExpression: ds${user_id % 2}
+            tableStrategy:
+                inline:
+                    shardingColumn: order_id
+                    algorithmExpression: t_order_item${order_id % 2}
+    bindingTables:
+        - t_order,t_order_item
+    broadcastTables:
+        - t_config
+
+    defaultDataSourceName: ds0
+    defaultTableStrategy:
+        none:
+    defaultKeyGenerator:
+        type: SNOWFLAKE
+        column: order_id
+
+props:
+    sql.show: true

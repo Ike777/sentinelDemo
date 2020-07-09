@@ -1,0 +1,48 @@
+server:
+    port: 8081
+
+
+
+spring:
+    cloud:
+        sentinel:
+            transport:
+                port: 8721
+
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds0?nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: admin
+        type: com.alibaba.druid.pool.DruidDataSource
+        # type: com.zaxxer.hikari.HikariDataSource
+    ds0:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds0
+        username: root
+        password: admin
+        type: com.zaxxer.hikari.HikariDataSource
+    ds1:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds1
+        username: root
+        password: admin
+        type: com.zaxxer.hikari.HikariDataSource
+
+    druid:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds0?nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: admin
+
+    profiles:
+        active: sharding-tables
+        #active: sdtable
+
+    sql:
+        show: true
+
+mybatis:
+    mapper-locations: com/modules/**/*Mapper.xml,generator/*Mapper.xml
+
+

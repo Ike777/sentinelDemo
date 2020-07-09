@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.users.generate">
+  <resultMap id="BaseResultMap" type="com.module.users.generate.TUser">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="uaser_name" jdbcType="VARCHAR" property="uaserName" />
+      <result column="tenant_id" jdbcType="VARCHAR" property="tenantId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, uaser_name ,tenant_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.module.users.generate.TUser" useGeneratedKeys="true">
+    insert into t_user (uaser_name,tenant_id)
+    values (#{uaserName,jdbcType=VARCHAR},#{tenantId})
+  </insert>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.module.users.generate.TUser" useGeneratedKeys="true">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uaserName != null">
+        uaser_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uaserName != null">
+        #{uaserName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.module.users.generate.TUser">
+    update t_user
+    <set>
+      <if test="uaserName != null">
+        uaser_name = #{uaserName,jdbcType=VARCHAR},
+        tenant_id = #{tenantId}
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.module.users.generate.TUser">
+    update t_user
+    set uaser_name = #{uaserName,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>
