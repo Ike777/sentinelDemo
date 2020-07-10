@@ -1,3 +1,4 @@
+```
 CREATE TABLE `t_user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `uaser_name` varchar(50) DEFAULT NULL,
@@ -27,3 +28,4 @@ CREATE TABLE `t_order` (
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+```
