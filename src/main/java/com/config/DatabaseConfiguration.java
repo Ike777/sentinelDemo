@@ -27,7 +27,8 @@ import java.io.InputStream;
 
 
 @Configuration
-@MapperScan({"com.module.users.generate*","com.sharding.module.mapper*"})
+@MapperScan({"com.module.users.generate*",
+    "com.sharding.module.order.mapper*"})
 @EnableConfigurationProperties({DataSourceProperties.class,  LiquibaseProperties.class ,MybatisProperties.class})
 public class DatabaseConfiguration {
 
