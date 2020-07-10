@@ -27,7 +27,7 @@ import java.io.InputStream;
 
 
 @Configuration
-@MapperScan({"com.module.users.generate*" })
+@MapperScan({"com.module.users.generate*","com.sharding.module.mapper*"})
 @EnableConfigurationProperties({DataSourceProperties.class,  LiquibaseProperties.class ,MybatisProperties.class})
 public class DatabaseConfiguration {
 
@@ -89,8 +89,8 @@ public class DatabaseConfiguration {
     @Bean
     public MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean() {
         MybatisSqlSessionFactoryBean mybatisSqlSessionFactoryBean = new MybatisSqlSessionFactoryBean();
-        mybatisSqlSessionFactoryBean.setDataSource(dataSource());
-        //mybatisSqlSessionFactoryBean.setDataSource(dataSource);
+        //mybatisSqlSessionFactoryBean.setDataSource(dataSource());
+        mybatisSqlSessionFactoryBean.setDataSource(dataSource);
 
         if (StringUtils.hasLength(this.properties.getTypeAliasesPackage())) {
             mybatisSqlSessionFactoryBean.setTypeAliasesPackage(this.properties.getTypeAliasesPackage());

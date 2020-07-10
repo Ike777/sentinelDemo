@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-@Configuration
-@MapperScan({"com.sharding.module.mapper*" })
-@EnableConfigurationProperties({DataSourceProperties.class,  LiquibaseProperties.class ,MybatisProperties.class})
+//@Configuration
+//@MapperScan({"com.sharding.module.mapper*" })
+//@EnableConfigurationProperties({DataSourceProperties.class,  LiquibaseProperties.class ,MybatisProperties.class})
 public class ShardingDatabaseConfig {
 
     private final DataSourceProperties dataSourceProperties;
